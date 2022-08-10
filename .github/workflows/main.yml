@@ -11,6 +11,9 @@ jobs:
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./bundle1.zip ./
+      - name: Install Sklaearn
+        run:
+          pip install scikit-learn
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
