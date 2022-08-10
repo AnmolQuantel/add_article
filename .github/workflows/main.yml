@@ -19,5 +19,5 @@ jobs:
           aws_region: us-east-1
           function_name: dev_add_article
           zip_file: bundle1.zip
-          memory_size: 512
+          memory_size: 128
           timeout: 10
