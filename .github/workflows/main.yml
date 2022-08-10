@@ -13,13 +13,11 @@ jobs:
           args: zip -qq -r ./bundle1.zip ./
       - name: default deploy
         uses: appleboy/lambda-action@master
-        env:
-          CI: true
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
-          function_name: dev_get_article
+          function_name: dev_add_article
           zip_file: bundle1.zip
           memory_size: 512
           timeout: 10
