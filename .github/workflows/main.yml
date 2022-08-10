@@ -7,10 +7,7 @@ jobs:
     steps:
       - name: checkout source code
         uses: actions/checkout@v1
-      - name: zip
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r ./bundle1.zip ./
+      
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
@@ -18,6 +15,6 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
           function_name: dev_add_article
-          zip_file: bundle1.zip
+          source: lambda_function.py
           memory_size: 128
           timeout: 10
