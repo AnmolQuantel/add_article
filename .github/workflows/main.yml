@@ -23,5 +23,4 @@ jobs:
           aws_region: us-east-1
           function_name: test_github_actions
           source: lambda_function.py
-          timeout: 10
-          memory_size: 128
+          
