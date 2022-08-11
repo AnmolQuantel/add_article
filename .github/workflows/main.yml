@@ -15,8 +15,8 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: default deploy
-        uses: appleboy/lambda-action@master
+      - name: AWS Lambda Deploy
+        uses: appleboy/lambda-action@v0.1.5
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
