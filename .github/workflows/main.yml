@@ -22,8 +22,6 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
           layers: arn:aws:lambda:us-east-1:751743882368:layer:tenjin-utils:3
-          securitygroups: sg-01d6d6d10e996cde7
-          subnets: subnet-000315d04cabb21a4,subnet-099d371e047a1085d,subnet-0cfca41baccf57006
           role: arn:aws:iam::751743882368:role/tenjinapi-dev-vpc-lambda-access-role
           function_name: test_github_actions
           source: lambda_function.py
