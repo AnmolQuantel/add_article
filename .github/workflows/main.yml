@@ -21,5 +21,10 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
-          function_name: dev_add_article
+          function_name: test_github_actions
           source: lambda_function.py
+          layers: arn:aws:lambda:us-east-1:751743882368:layer:tenjin-utils:3
+          subnets: 000315d04cabb21a4,099d371e047a1085d,0cfca41baccf57006
+          securitygroups: sg-01d6d6d10e996cde7
+          timeout: 10
+          memory_size: 128
