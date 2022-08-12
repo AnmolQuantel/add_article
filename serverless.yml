@@ -15,7 +15,7 @@ package:
 
 functions:
   theLambda:
-    name: test_github_actions
+    name: test_github_actions_serverless
     handler: lambda_function.handler
     description: test-lambda
     timeout: 10 # seconds
