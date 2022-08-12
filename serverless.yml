@@ -1,0 +1,28 @@
+service: basic-serverless-lambda-python
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-python-requirements
+
+package:
+  individually: true
+
+functions:
+  theLambda:
+    name: test_github_actions
+    handler: lambda_function.handler
+    description: test-lambda
+    timeout: 10 # seconds
+    memorySize: 128 # mb
+    vpc:
+      securityGroupIds:
+        - sg-01d6d6d10e996cde7
+      subnetIds:
+        - subnet-000315d04cabb21a4
+        - subnet-099d371e047a1085d
+        - subnet-0cfca41baccf57006
