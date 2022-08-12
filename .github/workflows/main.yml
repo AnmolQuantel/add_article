@@ -1,26 +1,40 @@
-name: deploy to lambda
-on: [push]
+name: Deploy Python Lambda
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  deploy_source:
-    name: build and deploy lambda
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 14.x # used for installing the serverless-python-requirements dependency from NPM
     strategy:
       matrix:
         python-version:
-          - 3.8
-    runs-on: ubuntu-latest
+          - 3.8 # with a build matrix, you can specify a list of python versions to deploy with
     steps:
-      - name: checkout source code
-        uses: actions/checkout@v2
-      - name: Setup Python
+      # --------- use Python to install Python dependencies and run linter, tests, etc. ---------
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: AWS Lambda Deploy
-        uses: serverless/github-action@master
+
+      # --------- Use Node and NPM to install serverless-python-requirements ---------
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
         with:
-          args: deploy
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install Node dependencies (specifically, serverless-python-requirements)
+        run: npm install
+
+      - name: Serverless Deploy
+        uses: dhollerbach/github-action-serverless-with-python-requirements@master
         env:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: us-east-1
-          
+          # SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          # or if using AWS credentials directly
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
